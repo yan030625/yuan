@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>莫丽媛 & 赵绿园 | 永远在一起</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'ZCOOL QingKe HuangYou', sans-serif;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 95%;
+            z-index: 10;
+            position: relative;
+            padding: 30px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1.5s ease-out;
+        }
+        
+        .title {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+            font-family: 'Ma Shan Zheng', cursive;
+            color: #ffb6c1;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #e6e6fa;
+        }
+        
+        .love-icon {
+            font-size: 4rem;
+            color: #ff1493;
+            margin: 20px 0;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            10% { transform: scale(1.2); }
+            20% { transform: scale(1); }
+            30% { transform: scale(1.2); }
+            40% { transform: scale(1); }
+        }
+        
+        .couple-container {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+        
+        .person-card {
+            width: 280px;
+            height: 380px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .person-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card-front {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+        }
+        
+        .card-back {
+            background: linear-gradient(45deg, #6b5b95, #8e7cc3);
+            transform: rotateY(180deg);
+            text-align: center;
+        }
+        
+        .male .card-front {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+        }
+        
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 4rem;
+            color: white;
+            border: 3px solid white;
+        }
+        
+        .name {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .title-card {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+        
+        .together-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: #ffd700;
+            font-weight: bold;
+            margin: 40px 0;
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff1493, 0 0 20px #ff1493; }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff1493, 0 0 40px #ff1493; }
+        }
+        
+        .interactive-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .typed-text {
+            min-height: 120px;
+            font-size: 1.8rem;
+            margin: 20px 0;
+            color: #ffb6c1;
+            line-height: 1.6;
+        }
+        
+        .action-btn {
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s;
+            margin: 30px 0;
+            font-family: 'Ma Shan Zheng', cursive;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(255, 20, 147, 0.4);
+        }
+        
+        .action-btn:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(25deg);
+            transition: all 0.8s;
+        }
+        
+        .action-btn:hover:after {
+            left: 120%;
+        }
+        
+        .memory-timeline {
+            display: flex;
+            justify-content: space-around;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+        
+        .memory {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 182, 193, 0.5);
+        }
+        
+        .memory:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(255, 182, 193, 0.2);
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+        }
+        
+        .memory i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ffb6c1;
+        }
+        
+        .memory-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .memory-date {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .promise-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+            border: 1px solid #ff69b4;
+            position: relative;
+        }
+        
+        .promise-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #ffb6c1;
+        }
+        
+        .promise-content {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .signature {
+            text-align: right;
+            font-size: 2rem;
+            margin-top: 30px;
+            font-family: 'Ma Shan Zheng', cursive;
+            color: #4facfe;
+        }
+        
+        .date {
+            text-align: right;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 1.2rem;
+            color: #e6e6fa;
+            opacity: 0.8;
+        }
+        
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            color: #ff1493;
+            font-size: 24px;
+            animation: float 8s linear infinite;
+            opacity: 0;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            
+            .couple-container {
+                gap: 40px;
+            }
+            
+            .person-card {
+                width: 250px;
+                height: 350px;
+            }
+            
+            .typed-text {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="hearts" id="heartsContainer"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="title">莫丽媛 & 赵绿园</h1>
+            <div class="love-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h2 class="subtitle">我们的爱情故事 · 永远在一起</h2>
+        </header>
+        
+        <div class="together-text">命中注定 · 天生一对</div>
+        
+        <div class="couple-container">
+            <div class="person-card male">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="name">赵绿园</div>
+                        <div class="title-card">永远的守护者</div>
+                    </div>
+                    <div class="card-back">
+                        <h3>给丽媛的悄悄话</h3>
+                        <p class="message">你的笑容是我生命中最美的风景，我会永远守护你的快乐，让你成为世界上最幸福的女孩。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="person-card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="name">莫丽媛</div>
+                        <div class="title-card">永远的天使</div>
+                    </div>
+                    <div class="card-back">
+                        <h3>给绿园的心里话</h3>
+                        <p class="message">在你的怀抱中，我找到了真正的自己。感谢你走进我的生命，让我的世界充满阳光和希望。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="interactive-section">
+            <h2><i class="fas fa-comment-dots"></i> 爱的告白</h2>
+            <div class="typed-text" id="typed-text"></div>
+            <button class="action-btn" id="loveBtn">
+                <i class="fas fa-heart"></i> 点击接受我的爱
+            </button>
+        </div>
+        
+        <div class="memory-timeline">
+            <div class="memory">
+                <i class="fas fa-calendar-day"></i>
+                <div class="memory-title">初次相遇</div>
+                <div class="memory-date">2020.05.20</div>
+            </div>
+            <div class="memory">
+                <i class="fas fa-heart"></i>
+                <div class="memory-title">第一次约会</div>
+                <div class="memory-date">2020.07.12</div>
+            </div>
+            <div class="memory">
+                <i class="fas fa-hands-holding-heart"></i>
+                <div class="memory-title">确定关系</div>
+                <div class="memory-date">2020.09.01</div>
+            </div>
+            <div class="memory">
+                <i class="fas fa-ring"></i>
+                <div class="memory-title">未来承诺</div>
+                <div class="memory-date">2025.06.04</div>
+            </div>
+        </div>
+        
+        <div class="promise-box">
+            <h2 class="promise-title"><i class="fas fa-hand-holding-heart"></i> 爱的承诺书</h2>
+            <p class="promise-content">
+                我，赵绿园，在此郑重承诺：<br>
+                无论顺境还是逆境，无论富有还是贫穷，无论健康还是疾病，<br>
+                我都会永远爱莫丽媛，珍惜她，尊重她，保护她，<br>
+                直到生命的最后一刻。
+            </p>
+            <div class="signature">赵绿园</div>
+            <div class="date">2025年6月4日</div>
+        </div>
+        
+        <footer>
+            <p>莫丽媛 & 赵绿园 · 永恒的爱 · 永结同心</p>
+            <p>从此刻到永远，我们的爱永不褪色</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 粒子背景配置
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffb6c1" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 4, random: true },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            }
+        });
+        
+        // 创建飘落的心形
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const heartCount = 30;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                heart.classList.add('heart');
+                
+                // 随机位置
+                heart.style.left = Math.random() * 100 + 'vw';
+                // 随机大小
+                const size = Math.random() * 20 + 10;
+                heart.style.fontSize = size + 'px';
+                // 随机颜色
+                const colors = ['#ff1493', '#ff69b4', '#ffb6c1', '#ff85a2'];
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                // 随机动画时长
+                const duration = Math.random() * 5 + 5;
+                heart.style.animationDuration = duration + 's';
+                // 随机延迟
+                const delay = Math.random() * 5;
+                heart.style.animationDelay = delay + 's';
+                
+                container.appendChild(heart);
+                
+                // 动画结束后移除元素
+                setTimeout(() => {
+                    heart.remove();
+                }, (duration + delay) * 1000);
+            }
+        }
+        
+        // 每2秒创建一批新的心形
+        setInterval(createHearts, 2000);
+        
+        // 打字机效果
+        const typed = new Typed('#typed-text', {
+            strings: [
+                "亲爱的丽媛，从见到你的第一眼起，我就知道你是我的命中注定...",
+                "你的笑容照亮了我生命中的每一个角落，你的温柔融化了我内心的冰霜...",
+                "我想和你一起看遍世间美景，尝遍人间美味，度过每一个春夏秋冬...",
+                "无论前方有多少风雨，我都会紧紧握住你的手，永不放开...",
+                "你愿意和我一起，书写属于我们的永恒爱情故事吗？"
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true,
+            showCursor: true,
+            cursorChar: '❤️',
+            shuffle: false
+        });
+        
+        // 烟花效果
+        function createFirework(x, y) {
+            const colors = ['#ff1493', '#ff69b4', '#ffb6c1', '#4facfe', '#00f2fe'];
+            const particles = 100;
+            
+            for (let i = 0; i < particles; i++) {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                
+                // 随机颜色
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                firework.style.backgroundColor = color;
+                
+                // 初始位置
+                firework.style.left = x + 'px';
+                firework.style.top = y + 'px';
+                
+                // 随机大小
+                const size = Math.random() * 4 + 2;
+                firework.style.width = size + 'px';
+                firework.style.height = size + 'px';
+                
+                document.body.appendChild(firework);
+                
+                // 随机方向和速度
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 2 + Math.random() * 2;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                // 动画
+                let posX = x;
+                let posY = y;
+                let opacity = 1;
+                
+                const animate = () => {
+                    posX += vx;
+                    posY += vy;
+                    opacity -= 0.01;
+                    
+                    firework.style.left = posX + 'px';
+                    firework.style.top = posY + 'px';
+                    firework.style.opacity = opacity;
+                    
+                    if (opacity > 0) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        firework.remove();
+                    }
+                };
+                
+                animate();
+            }
+        }
+        
+        // 按钮点击事件
+        document.getElementById('loveBtn').addEventListener('click', function() {
+            // 改变按钮文本
+            this.innerHTML = '<i class="fas fa-heart"></i> 我爱你！我们永远在一起！';
+            this.style.background = 'linear-gradient(45deg, #00c853, #64dd17)';
+            this.disabled = true;
+            
+            // 创建大量心形
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createHearts();
+                }, i * 100);
+            }
+            
+            // 创建烟花
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    createFirework(x, y);
+                }, i * 300);
+            }
+            
+            // 显示特殊消息
+            const typedText = document.getElementById('typed-text');
+            typed.destroy();
+            typedText.innerHTML = "❤️ 莫丽媛，谢谢你接受我的爱！从今天起，我们将携手共度人生的每一个美好瞬间。我承诺永远爱你、珍惜你、守护你，直到永远！ ❤️";
+            typedText.style.color = "#ffd700";
+            typedText.style.fontSize = "2rem";
+            typedText.style.textShadow = "0 0 10px rgba(255, 215, 0, 0.8)";
+        });
+        
+        // 记忆卡片点击效果
+        document.querySelectorAll('.memory').forEach(memory => {
+            memory.addEventListener('click', function() {
+                this.style.transform = 'scale(1.1) rotate(5deg)';
+                this.style.background = 'rgba(255, 182, 193, 0.3)';
+                this.style.boxShadow = '0 0 30px rgba(255, 105, 180, 0.7)';
+                
+                setTimeout(() => {
+                    this.style.transform = '';
+                    this.style.background = '';
+                    this.style.boxShadow = '';
+                }, 1000);
+                
+                createFirework(
+                    this.getBoundingClientRect().left + this.offsetWidth/2,
+                    this.getBoundingClientRect().top + this.offsetHeight/2
+                );
+            });
+        });
+        
+        // 初始创建心形
+        createHearts();
+    </script>
+</body>
+</html>
